@@ -23,7 +23,7 @@ getConnection = do
     (Just dbUrl) -> return dbUrl
     Nothing -> do
       putStrLn "No DATABASE_URL string found in environment, using default one."
-      return "dbname=splicers user=erik"
+      return "dbname=splicers user=postgres password=Welcome*99"
   connectPostgreSQL (pack dbUrl)
 
 migrate :: IO ()

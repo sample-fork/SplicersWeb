@@ -52,7 +52,8 @@ singleCardRoute title = do
 
 addCardRoute :: Route
 addCardRoute = do
-  withAuth renderAddCard "add-card"
+  -- withAuth renderAddCard "add-card"
+  lucidToSpock (renderAddCard "add-card")
 
 paramOrDefault :: (PathPiece p, MonadIO m) => Text -> p -> ActionT m p
 paramOrDefault name defaultValue = do
@@ -105,8 +106,9 @@ submitLoginRoute = do
   maybeSecret <- liftIO $ authorize username password
   case maybeSecret of
     Just secret -> do
-      setCookie "username" username 3600
-      setCookie "secret" secret 3600
+      setCookie "username" username ( CookieSettings {cs_EOL = CookieValidForSession}) -- 3600
+      setCookie "secret" secret ( CookieSettings {
+      cs_EOL = CookieValidForSession}) -- 3600
       maybeNextPage <- param "next"
       case maybeNextPage of
         Just nextPage -> redirect $ "/" <> nextPage

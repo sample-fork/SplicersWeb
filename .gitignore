@@ -3,3 +3,11 @@ latest.dump
 latest.dump
 .cabal-sandbox
 /cabal.sandbox.config
+.#*
+*.*~
+*.hi
+*.o
+.stack-work/
+.DS_Store
+*.swp
+*.keter
